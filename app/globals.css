@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography — fonts are loaded via next/font/local in app/layout.tsx,
+     which exposes them as these CSS variables (with automatic fallback-font
+     metric adjustment to reduce layout shift). */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand — deep navy ink paired with a signal teal accent.
+     Chosen deliberately to differ from typical "startup blue" palettes. */
+  --color-navy-50: #f2f5f9;
+  --color-navy-100: #e3e9f1;
+  --color-navy-200: #c3d0e2;
+  --color-navy-300: #93a9c7;
+  --color-navy-400: #5c7ba3;
+  --color-navy-500: #395c85;
+  --color-navy-600: #28456a;
+  --color-navy-700: #203657;
+  --color-navy-800: #16253e;
+  --color-navy-900: #0d1729;
+  --color-navy-950: #070d18;
+
+  --color-teal-50: #eefbf8;
+  --color-teal-100: #d3f4ec;
+  --color-teal-200: #a5e6d8;
+  --color-teal-300: #6fd1bf;
+  --color-teal-400: #3fb6a5;
+  --color-teal-500: #23988a;
+  --color-teal-600: #187a71;
+  --color-teal-700: #16625c;
+  --color-teal-800: #164e4a;
+  --color-teal-900: #14413e;
+  --color-teal-950: #072523;
+
+  --color-ink: #101826;
+  --color-ink-muted: #47536b;
+
+  --shadow-card: 0 1px 2px 0 rgba(13, 23, 41, 0.04), 0 8px 24px -8px rgba(13, 23, 41, 0.10);
+  --shadow-card-hover: 0 2px 4px 0 rgba(13, 23, 41, 0.06), 0 16px 32px -12px rgba(13, 23, 41, 0.16);
+
+  --animate-fade-up: fade-up 0.6s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-navy-100);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-navy-950);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-teal-200);
+    color: var(--color-navy-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal-500);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .container-fhb {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-fhb {
+      padding-inline: 2rem;
+    }
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(16, 24, 38, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16, 24, 38, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
