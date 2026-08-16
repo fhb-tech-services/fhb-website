@@ -3,10 +3,8 @@ import { ShieldCheck, Target, Handshake, MapPin, Lightbulb } from "lucide-react"
 import SectionHeading from "@/components/SectionHeading";
 import CTASection from "@/components/CTASection";
 import FadeIn from "@/components/FadeIn";
-import { techStack } from "@/lib/data";
 import { contactConfig } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
-import TechnologyCard from "@/components/TechnologyCard";
 
 export const metadata = pageMetadata({
   title: "About Us",
@@ -145,26 +143,6 @@ export default function AboutPage() {
                   </div>
                 );
               })}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* Technical expertise */}
-      <section className="bg-navy-950 py-20 sm:py-24" aria-labelledby="expertise-heading">
-        <div className="container-fhb">
-          <SectionHeading
-            id="expertise-heading"
-            eyebrow="Technical Expertise"
-            title="Depth Across the Stack"
-            description="Our engineering knowledge spans mobile, web, backend, cloud, and architecture — applied where it fits the problem."
-            light
-          />
-          <FadeIn>
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {techStack.map((category) => (
-                <TechnologyCard key={category.category} category={category} />
-              ))}
             </div>
           </FadeIn>
         </div>
