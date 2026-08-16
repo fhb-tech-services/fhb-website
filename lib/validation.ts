@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { serviceInterestOptions } from "./data";
+import { projectTypeOptions } from "./data";
 
 export const contactFormSchema = z.object({
   name: z
@@ -24,8 +24,8 @@ export const contactFormSchema = z.object({
     .max(160, "Company name is too long.")
     .optional()
     .or(z.literal("")),
-  serviceInterest: z.enum(serviceInterestOptions, {
-    message: "Please select a service.",
+  projectType: z.enum(projectTypeOptions, {
+    message: "Please select a project type.",
   }),
   message: z
     .string()
@@ -46,7 +46,7 @@ export const contactFormDefaults: ContactFormValues = {
   email: "",
   phone: "",
   company: "",
-  serviceInterest: "Technology Consulting",
+  projectType: "Software Consulting",
   message: "",
   website: "",
 };

@@ -1,12 +1,26 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, ChevronDown } from "lucide-react";
 import { contactFormSchema, type ContactFormValues, contactFormDefaults } from "@/lib/validation";
-import { serviceInterestOptions } from "@/lib/data";
+import { projectTypeOptions } from "@/lib/data";
 
 type FieldErrors = Partial<Record<keyof ContactFormValues, string>>;
 type SubmitState = "idle" | "submitting" | "success" | "error";
+
+/** Formats digits as a North American phone number, e.g. "+1 (123) 456-7890", as the user types. */
+function formatPhoneNumber(value: string): string {
+  let digits = value.replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) {
+    digits = digits.slice(1);
+  }
+  digits = digits.slice(0, 10);
+
+  if (digits.length === 0) return "";
+  if (digits.length < 4) return `+1 (${digits}`;
+  if (digits.length < 7) return `+1 (${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `+1 (${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
 
 export default function ContactForm() {
   const [values, setValues] = useState<ContactFormValues>(contactFormDefaults);
@@ -61,18 +75,18 @@ export default function ContactForm() {
       <div
         role="status"
         aria-live="polite"
-        className="flex flex-col items-center gap-3 rounded-2xl border border-teal-200 bg-teal-50 px-6 py-12 text-center"
+        className="flex flex-col items-center gap-3 rounded-2xl border border-teal-200 bg-teal-50 px-6 py-12 text-center dark:border-teal-800 dark:bg-teal-500/10"
       >
-        <CheckCircle2 className="h-10 w-10 text-teal-600" aria-hidden="true" />
-        <h3 className="text-lg font-semibold text-navy-950">Message sent</h3>
-        <p className="max-w-sm text-sm leading-relaxed text-ink-muted">
+        <CheckCircle2 className="h-10 w-10 text-teal-600 dark:text-teal-400" aria-hidden="true" />
+        <h3 className="text-lg font-semibold text-navy-950 dark:text-white">Message sent</h3>
+        <p className="max-w-sm text-sm leading-relaxed text-ink-muted dark:text-navy-300">
           Thank you for reaching out. We&rsquo;ve received your message and will
           get back to you shortly.
         </p>
         <button
           type="button"
           onClick={() => setSubmitState("idle")}
-          className="mt-2 text-sm font-semibold text-teal-700 hover:text-teal-800"
+          className="mt-2 text-sm font-semibold text-teal-700 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200"
         >
           Send another message
         </button>
@@ -103,6 +117,7 @@ export default function ContactForm() {
             name="name"
             type="text"
             autoComplete="name"
+            placeholder="Jane Doe"
             value={values.name}
             onChange={(e) => updateField("name", e.target.value)}
             aria-invalid={Boolean(errors.name)}
@@ -117,6 +132,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
+            placeholder="jane@company.com"
             value={values.email}
             onChange={(e) => updateField("email", e.target.value)}
             aria-invalid={Boolean(errors.email)}
@@ -131,8 +147,10 @@ export default function ContactForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
+            inputMode="tel"
+            placeholder="+1 (123) 456-7890"
             value={values.phone}
-            onChange={(e) => updateField("phone", e.target.value)}
+            onChange={(e) => updateField("phone", formatPhoneNumber(e.target.value))}
             aria-invalid={Boolean(errors.phone)}
             aria-describedby={errors.phone ? "phone-error" : undefined}
             className={inputClass(Boolean(errors.phone))}
@@ -145,6 +163,7 @@ export default function ContactForm() {
             name="company"
             type="text"
             autoComplete="organization"
+            placeholder="Acme Inc."
             value={values.company}
             onChange={(e) => updateField("company", e.target.value)}
             aria-invalid={Boolean(errors.company)}
@@ -154,22 +173,28 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      <Field label="Service Interested In" htmlFor="serviceInterest" required error={errors.serviceInterest}>
-        <select
-          id="serviceInterest"
-          name="serviceInterest"
-          value={values.serviceInterest}
-          onChange={(e) => updateField("serviceInterest", e.target.value as ContactFormValues["serviceInterest"])}
-          aria-invalid={Boolean(errors.serviceInterest)}
-          aria-describedby={errors.serviceInterest ? "serviceInterest-error" : undefined}
-          className={inputClass(Boolean(errors.serviceInterest))}
-        >
-          {serviceInterestOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+      <Field label="Project Type" htmlFor="projectType" required error={errors.projectType}>
+        <div className="relative">
+          <select
+            id="projectType"
+            name="projectType"
+            value={values.projectType}
+            onChange={(e) => updateField("projectType", e.target.value as ContactFormValues["projectType"])}
+            aria-invalid={Boolean(errors.projectType)}
+            aria-describedby={errors.projectType ? "projectType-error" : undefined}
+            className={`appearance-none pr-10 ${inputClass(Boolean(errors.projectType))}`}
+          >
+            {projectTypeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400 dark:text-navy-500"
+            aria-hidden="true"
+          />
+        </div>
       </Field>
 
       <Field label="Message" htmlFor="message" required error={errors.message}>
@@ -181,7 +206,7 @@ export default function ContactForm() {
           onChange={(e) => updateField("message", e.target.value)}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className={inputClass(Boolean(errors.message))}
+          className={`min-h-[120px] max-h-[360px] ${inputClass(Boolean(errors.message))}`}
           placeholder="Tell us a bit about your project, goals, or technical challenge."
         />
       </Field>
@@ -189,7 +214,7 @@ export default function ContactForm() {
       {serverError && (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+          className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-500/10 dark:text-red-300"
         >
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
           <span>{serverError}</span>
@@ -199,13 +224,13 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={submitState === "submitting"}
-        className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-white dark:text-navy-950 dark:hover:bg-teal-300"
       >
         {submitState === "submitting" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
         {submitState === "submitting" ? "Sending..." : "Send Message"}
       </button>
 
-      <p className="text-xs text-ink-muted">
+      <p className="text-xs text-ink-muted dark:text-navy-400">
         Fields marked with * are required. By submitting this form, you agree
         to be contacted about your inquiry.
       </p>
@@ -228,12 +253,12 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-navy-950">
-        {label} {required && <span className="text-teal-700">*</span>}
+      <label htmlFor={htmlFor} className="text-sm font-medium text-navy-950 dark:text-white">
+        {label} {required && <span className="text-teal-700 dark:text-teal-300">*</span>}
       </label>
       {children}
       {error && (
-        <p id={`${htmlFor}-error`} role="alert" className="text-xs font-medium text-red-600">
+        <p id={`${htmlFor}-error`} role="alert" className="text-xs font-medium text-red-600 dark:text-red-400">
           {error}
         </p>
       )}
@@ -242,7 +267,7 @@ function Field({
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-navy-950 shadow-sm transition-colors placeholder:text-navy-300 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 ${
-    hasError ? "border-red-400" : "border-navy-200"
+  return `w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-navy-950 shadow-sm transition-colors placeholder:text-navy-300 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:bg-navy-900 dark:text-white dark:placeholder:text-navy-500 ${
+    hasError ? "border-red-400 dark:border-red-700" : "border-navy-200 dark:border-navy-700"
   }`;
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Logo from "@/components/Logo";
+import ThemeToggle from "@/components/ThemeToggle";
 import { navLinks, primaryCta } from "@/lib/constants";
 
 export default function Navbar() {
@@ -38,8 +39,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "border-b border-navy-100 bg-white/90 shadow-sm backdrop-blur-md"
-          : "border-b border-transparent bg-white/70 backdrop-blur-sm"
+          ? "border-b border-navy-100 bg-white/90 shadow-sm backdrop-blur-md dark:border-navy-800 dark:bg-navy-950/90"
+          : "border-b border-transparent bg-white/70 backdrop-blur-sm dark:bg-navy-950/70"
       }`}
     >
       <nav
@@ -48,8 +49,8 @@ export default function Navbar() {
       >
         <Logo />
 
-        <div className="hidden items-center gap-8 md:flex">
-          <ul className="flex items-center gap-8">
+        <div className="hidden items-center gap-6 md:flex">
+          <ul className="flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -57,8 +58,10 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`text-sm font-medium transition-colors hover:text-teal-700 ${
-                      isActive ? "text-navy-950" : "text-ink-muted"
+                    className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-teal-50 font-semibold text-teal-700 dark:bg-teal-500/10 dark:text-teal-300"
+                        : "text-ink-muted hover:bg-navy-50 hover:text-navy-950 dark:text-navy-300 dark:hover:bg-navy-800 dark:hover:text-white"
                     }`}
                   >
                     {link.label}
@@ -67,30 +70,34 @@ export default function Navbar() {
               );
             })}
           </ul>
+          <ThemeToggle />
           <Link
             href={primaryCta.href}
-            className="inline-flex items-center gap-2 rounded-lg bg-navy-950 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700"
+            className="inline-flex items-center gap-2 rounded-lg bg-navy-950 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700 dark:bg-white dark:text-navy-950 dark:hover:bg-teal-300"
           >
             {primaryCta.label}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsMobileOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-navy-950 md:hidden"
-          aria-expanded={isMobileOpen}
-          aria-controls="mobile-nav"
-          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-        >
-          {isMobileOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setIsMobileOpen((v) => !v)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-navy-950 dark:text-white"
+            aria-expanded={isMobileOpen}
+            aria-controls="mobile-nav"
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+          </button>
+        </div>
       </nav>
 
       <div
         id="mobile-nav"
-        className={`grid overflow-hidden border-b border-navy-100 bg-white shadow-lg transition-[grid-template-rows] duration-300 ease-out md:hidden ${
+        className={`grid overflow-hidden border-b border-navy-100 bg-white shadow-lg transition-[grid-template-rows] duration-300 ease-out dark:border-navy-800 dark:bg-navy-950 md:hidden ${
           isMobileOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
@@ -105,8 +112,8 @@ export default function Navbar() {
                     aria-current={isActive ? "page" : undefined}
                     className={`block rounded-lg px-3 py-3 text-base font-medium transition-colors ${
                       isActive
-                        ? "bg-navy-50 text-navy-950"
-                        : "text-ink-muted hover:bg-navy-50 hover:text-navy-950"
+                        ? "bg-teal-50 font-semibold text-teal-700 dark:bg-teal-500/10 dark:text-teal-300"
+                        : "text-ink-muted hover:bg-navy-50 hover:text-navy-950 dark:text-navy-300 dark:hover:bg-navy-800 dark:hover:text-white"
                     }`}
                   >
                     {link.label}
@@ -117,7 +124,7 @@ export default function Navbar() {
             <li className="pt-2">
               <Link
                 href={primaryCta.href}
-                className="flex items-center justify-center gap-2 rounded-lg bg-navy-950 px-4 py-3 text-base font-semibold text-white"
+                className="flex items-center justify-center gap-2 rounded-lg bg-navy-950 px-4 py-3 text-base font-semibold text-white dark:bg-white dark:text-navy-950"
               >
                 {primaryCta.label}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

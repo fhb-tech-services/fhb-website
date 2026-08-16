@@ -7,6 +7,6 @@ export const alt = "FHB Tech Services Inc. — Technology Consulting & Software 
 export default function Image() {
   return renderOgImage(
     "Technology Solutions Built Around Your Business",
-    "Technology consulting & software development for Canada and North America"
+    "Software consulting & mobile application development for Canada and North America"
   );
 }

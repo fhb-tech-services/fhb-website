@@ -14,10 +14,10 @@ export default function PrivacyPolicyPage() {
   return (
     <section className="py-20 sm:py-24">
       <div className="container-fhb max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight text-navy-950">Privacy Policy</h1>
-        <p className="mt-3 text-sm text-ink-muted">Last updated: {lastUpdated}</p>
+        <h1 className="text-4xl font-bold tracking-tight text-navy-950 dark:text-white">Privacy Policy</h1>
+        <p className="mt-3 text-sm text-ink-muted dark:text-navy-400">Last updated: {lastUpdated}</p>
 
-        <div className="prose-fhb mt-10 flex flex-col gap-8 text-base leading-relaxed text-ink-muted">
+        <div className="prose-fhb mt-10 flex flex-col gap-8 text-base leading-relaxed text-ink-muted dark:text-navy-300">
           <p>
             FHB Tech Services Inc. (&ldquo;FHB,&rdquo; &ldquo;we,&rdquo;
             &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects your privacy and
@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Information We Collect</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Information We Collect</h2>
             <p className="mt-3">
               We may collect personal information that you voluntarily
               provide to us, such as your name, email address, phone number,
@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">How We Use Your Information</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">How We Use Your Information</h2>
             <p className="mt-3">We use the information we collect to:</p>
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>Respond to inquiries and communicate with prospective and current clients</li>
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">How We Share Information</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">How We Share Information</h2>
             <p className="mt-3">
               We do not sell your personal information. We may share
               information with trusted service providers who assist us in
@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Data Retention</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Data Retention</h2>
             <p className="mt-3">
               We retain personal information only for as long as necessary to
               fulfill the purposes described in this policy, or as required
@@ -72,7 +72,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Your Rights</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Your Rights</h2>
             <p className="mt-3">
               Depending on your jurisdiction, you may have the right to
               access, correct, or request deletion of your personal
@@ -82,7 +82,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Security</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Security</h2>
             <p className="mt-3">
               We take reasonable technical and organizational measures to
               protect the personal information we collect. However, no method
@@ -92,7 +92,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Changes to This Policy</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Changes to This Policy</h2>
             <p className="mt-3">
               We may update this Privacy Policy from time to time. Any
               changes will be posted on this page with an updated
@@ -101,14 +101,14 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Contact Us</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Contact Us</h2>
             <p className="mt-3">
               If you have questions about this Privacy Policy, please contact
               us{contactConfig.email ? (
                 <>
                   {" "}
                   at{" "}
-                  <a href={`mailto:${contactConfig.email}`} className="font-medium text-teal-700">
+                  <a href={`mailto:${contactConfig.email}`} className="font-medium text-teal-700 dark:text-teal-300">
                     {contactConfig.email}
                   </a>
                 </>
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
                 " through our contact page"
               )}
               {" "}or visit{" "}
-              <a href="/contact" className="font-medium text-teal-700">
+              <a href="/contact" className="font-medium text-teal-700 dark:text-teal-300">
                 {siteConfig.name}&rsquo;s contact page
               </a>
               .

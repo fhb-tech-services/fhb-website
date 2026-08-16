@@ -14,10 +14,10 @@ export default function TermsOfServicePage() {
   return (
     <section className="py-20 sm:py-24">
       <div className="container-fhb max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight text-navy-950">Terms of Service</h1>
-        <p className="mt-3 text-sm text-ink-muted">Last updated: {lastUpdated}</p>
+        <h1 className="text-4xl font-bold tracking-tight text-navy-950 dark:text-white">Terms of Service</h1>
+        <p className="mt-3 text-sm text-ink-muted dark:text-navy-400">Last updated: {lastUpdated}</p>
 
-        <div className="prose-fhb mt-10 flex flex-col gap-8 text-base leading-relaxed text-ink-muted">
+        <div className="prose-fhb mt-10 flex flex-col gap-8 text-base leading-relaxed text-ink-muted dark:text-navy-300">
           <p>
             These Terms of Service (&ldquo;Terms&rdquo;) govern your use of
             the {siteConfig.name} website. By accessing or using our website,
@@ -26,7 +26,7 @@ export default function TermsOfServicePage() {
           </p>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Use of This Website</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Use of This Website</h2>
             <p className="mt-3">
               This website is provided for informational purposes to help you
               learn about FHB Tech Services Inc. and our services. You agree
@@ -37,7 +37,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Intellectual Property</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Intellectual Property</h2>
             <p className="mt-3">
               All content on this website, including text, graphics, logos,
               and design elements, is the property of FHB Tech Services Inc.
@@ -49,7 +49,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">No Professional Advice</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">No Professional Advice</h2>
             <p className="mt-3">
               Information provided on this website is for general
               informational purposes only and does not constitute
@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Contact Form Submissions</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Contact Form Submissions</h2>
             <p className="mt-3">
               When you submit information through our contact form, you
               represent that the information provided is accurate and that
@@ -71,7 +71,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Limitation of Liability</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Limitation of Liability</h2>
             <p className="mt-3">
               To the fullest extent permitted by law, FHB Tech Services Inc.
               shall not be liable for any indirect, incidental, or
@@ -82,7 +82,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Third-Party Links</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Third-Party Links</h2>
             <p className="mt-3">
               This website may contain links to third-party websites. We are
               not responsible for the content or practices of any linked
@@ -91,7 +91,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Governing Law</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Governing Law</h2>
             <p className="mt-3">
               These Terms are governed by the laws of Canada and the
               applicable laws of the province in which FHB Tech Services Inc.
@@ -100,7 +100,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Changes to These Terms</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Changes to These Terms</h2>
             <p className="mt-3">
               We may update these Terms from time to time. Continued use of
               this website after changes are posted constitutes acceptance of
@@ -109,14 +109,14 @@ export default function TermsOfServicePage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-navy-950">Contact Us</h2>
+            <h2 className="text-xl font-semibold text-navy-950 dark:text-white">Contact Us</h2>
             <p className="mt-3">
               If you have questions about these Terms, please contact us
               {contactConfig.email ? (
                 <>
                   {" "}
                   at{" "}
-                  <a href={`mailto:${contactConfig.email}`} className="font-medium text-teal-700">
+                  <a href={`mailto:${contactConfig.email}`} className="font-medium text-teal-700 dark:text-teal-300">
                     {contactConfig.email}
                   </a>
                 </>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import Logo from "@/components/Logo";
 import { contactConfig, footerLinks } from "@/lib/constants";
 
@@ -21,7 +21,7 @@ export default function Footer() {
           <h2 className="text-sm font-semibold uppercase tracking-wide text-white">
             Navigation
           </h2>
-          <ul className="mt-4 flex flex-col gap-3">
+          <ul className="mt-4 grid grid-flow-col grid-rows-4 gap-x-6 gap-y-3">
             {footerLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -62,7 +62,10 @@ export default function Footer() {
                 </a>
               </li>
             )}
-            <li className="text-navy-300">{contactConfig.region}</li>
+            <li className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 shrink-0 text-teal-400" aria-hidden="true" />
+              {contactConfig.region}
+            </li>
           </ul>
         </div>
       </div>
@@ -70,7 +73,9 @@ export default function Footer() {
       <div className="border-t border-navy-800">
         <div className="container-fhb flex flex-col gap-2 py-6 text-xs text-navy-300 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {year} FHB Tech Services Inc. All rights reserved.</p>
-          <p>Based in Canada · Serving clients across North America</p>
+          <p>
+            <span aria-hidden="true">🇨🇦</span> Based in Canada · Serving clients across North America
+          </p>
         </div>
       </div>
     </footer>

@@ -2,11 +2,11 @@ import { renderOgImage, ogImageSize, ogImageContentType } from "@/lib/og-image";
 
 export const size = ogImageSize;
 export const contentType = ogImageContentType;
-export const alt = "Services — FHB Tech Services Inc.";
+export const alt = "Portfolio — FHB Tech Services Inc.";
 
 export default function Image() {
   return renderOgImage(
-    "Technology Services Built for Real Business Outcomes",
-    "Mobile app development, software consulting, integration, and engineering support"
+    "Case Studies & Delivered Projects",
+    "Mobile applications, software consulting, and system integration work"
   );
 }

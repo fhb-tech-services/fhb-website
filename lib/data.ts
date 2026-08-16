@@ -2,15 +2,10 @@ import type { LucideIcon } from "lucide-react";
 import {
   Compass,
   Smartphone,
-  LayoutGrid,
-  Boxes,
-  Cloud,
+  Plug,
   Sparkles,
   Users,
-  Wrench,
   ShieldCheck,
-  Target,
-  Handshake,
   MapPin,
   Search,
   ClipboardList,
@@ -24,134 +19,110 @@ import {
   Building2,
 } from "lucide-react";
 
+export type ServiceSubsection = {
+  title: string;
+  items: string[];
+};
+
 export type Service = {
   slug: string;
   title: string;
   icon: LucideIcon;
   summary: string;
   description: string;
+  /** Flat list. Used as the whole capability list, or as "Additional Capabilities" alongside `subsections`. */
   capabilities: string[];
+  /** Optional grouped breakdown (e.g. Mobile's iOS / Android / Cross-Platform tracks). */
+  subsections?: ServiceSubsection[];
 };
 
 export const services: Service[] = [
-  {
-    slug: "technology-consulting",
-    title: "Technology Consulting",
-    icon: Compass,
-    summary:
-      "Clear, practical guidance for making informed technology decisions.",
-    description:
-      "We help businesses evaluate technical options, define strategy, and plan digital transformation initiatives with confidence. Our consulting work focuses on aligning technology decisions with real business outcomes rather than trends.",
-    capabilities: [
-      "Technology strategy and roadmapping",
-      "Architecture evaluation and recommendations",
-      "Digital transformation planning",
-      "Technical due diligence",
-    ],
-  },
   {
     slug: "mobile-application-development",
     title: "Mobile Application Development",
     icon: Smartphone,
     summary:
-      "Native and cross-platform mobile applications built for reliability.",
+      "Native iOS and Android apps, plus cross-platform solutions built for reliability.",
     description:
-      "We design and build mobile applications for iOS and modern cross-platform environments, with attention to performance, usability, and long-term maintainability.",
+      "We design and build mobile applications for iOS and Android, as well as cross-platform solutions, with attention to architecture, performance, and long-term maintainability. We also modernize existing mobile applications and improve their performance and architecture.",
+    subsections: [
+      {
+        title: "iOS Development",
+        items: [
+          "Swift",
+          "SwiftUI",
+          "UIKit",
+          "Combine",
+          "Modern iOS architecture",
+          "App Store deployment",
+        ],
+      },
+      {
+        title: "Android Development",
+        items: [
+          "Kotlin",
+          "Android SDK",
+          "Jetpack components",
+          "Modern Android architecture",
+          "Google Play Store deployment",
+        ],
+      },
+      {
+        title: "Cross-Platform Development",
+        items: ["React Native", "Shared mobile solutions across iOS and Android"],
+      },
+    ],
     capabilities: [
-      "Native iOS development (Swift, SwiftUI, UIKit)",
-      "Cross-platform mobile solutions",
-      "App architecture and code quality",
-      "App Store release support",
+      "Mobile app modernization",
+      "Performance optimization",
+      "Architecture improvements",
+      "Legacy application migration",
     ],
   },
   {
-    slug: "web-application-development",
-    title: "Web Application Development",
-    icon: LayoutGrid,
+    slug: "software-consulting",
+    title: "Software Consulting",
+    icon: Compass,
     summary:
-      "Modern, responsive web applications, portals, and SaaS platforms.",
+      "Clear, practical guidance for making informed technology decisions.",
     description:
-      "From customer-facing websites to internal dashboards and multi-tenant SaaS platforms, we build web applications that are fast, accessible, and built to scale with your business.",
+      "We help businesses evaluate technical options, review application architecture, and modernize legacy systems — applying sound engineering practices throughout, rather than chasing trends.",
     capabilities: [
-      "Custom web applications and portals",
-      "Dashboards and internal tools",
-      "SaaS platform development",
-      "Responsive, accessible interfaces",
-    ],
-  },
-  {
-    slug: "software-architecture-modernization",
-    title: "Software Architecture & Modernization",
-    icon: Boxes,
-    summary:
-      "Modernize legacy systems and reduce technical debt.",
-    description:
-      "We assess existing systems, identify architectural weaknesses, and plan a practical path toward a more maintainable, modern codebase — without disrupting business operations.",
-    capabilities: [
+      "Technical consulting",
+      "Application architecture reviews",
+      "Code quality improvements",
       "Legacy system modernization",
-      "Architecture redesign",
-      "Technical debt reduction",
-      "Codebase audits and improvement plans",
+      "Engineering best practices",
     ],
   },
   {
-    slug: "cloud-backend-solutions",
-    title: "Cloud & Backend Solutions",
-    icon: Cloud,
+    slug: "application-integration",
+    title: "Application Integration",
+    icon: Plug,
     summary:
-      "APIs, cloud infrastructure, and backend systems built to scale.",
+      "Connecting your systems through REST, GraphQL, cloud, and third-party integrations.",
     description:
-      "We design and build backend services and cloud infrastructure that support growth — including APIs, databases, authentication, and integrations with third-party systems.",
+      "We build reliable integrations between your applications and the services they depend on — APIs, cloud platforms, and third-party tools — so your systems work together smoothly.",
     capabilities: [
-      "REST and GraphQL API development",
-      "Cloud infrastructure (AWS, Azure)",
-      "Database design and optimization",
-      "Authentication and integrations",
+      "REST API integration",
+      "GraphQL integration",
+      "Cloud service integration",
+      "Third-party service integration",
     ],
   },
   {
-    slug: "ai-automation",
-    title: "AI & Automation",
-    icon: Sparkles,
-    summary:
-      "Practical AI integrations that reduce manual, repetitive work.",
-    description:
-      "We help businesses apply AI and automation where it creates real value — streamlining workflows, reducing manual work, and integrating intelligent features into existing systems.",
-    capabilities: [
-      "AI feature integration",
-      "Workflow and process automation",
-      "Internal tooling with AI assistance",
-      "Automation strategy",
-    ],
-  },
-  {
-    slug: "staff-augmentation",
-    title: "Staff Augmentation",
+    slug: "engineering-support-team-augmentation",
+    title: "Engineering Support / Team Augmentation",
     icon: Users,
     summary:
-      "Experienced technical resources to extend your engineering team.",
+      "Experienced senior developers who extend your engineering team.",
     description:
-      "When your team needs additional capacity, we provide experienced developers who integrate with your existing processes and help accelerate delivery without long hiring cycles.",
+      "When your team needs additional capacity or expertise, we provide experienced senior developers who work directly with your existing engineering team — contributing code, reviews, and technical guidance.",
     capabilities: [
-      "Dedicated development resources",
-      "Team augmentation for existing projects",
-      "Flexible engagement models",
-      "Works within your existing tools and workflow",
-    ],
-  },
-  {
-    slug: "ongoing-development-support",
-    title: "Ongoing Development & Support",
-    icon: Wrench,
-    summary:
-      "Long-term development, maintenance, and technical support.",
-    description:
-      "We support applications well beyond launch — with continued development, performance optimization, troubleshooting, and maintenance to keep systems reliable.",
-    capabilities: [
-      "Application maintenance",
-      "Performance optimization",
-      "Bug fixes and troubleshooting",
-      "Long-term technical support",
+      "Senior developer consulting",
+      "Remote engineering support",
+      "Collaboration with existing engineering teams",
+      "Code reviews and technical guidance",
     ],
   },
 ];
@@ -164,34 +135,29 @@ export type Differentiator = {
 
 export const differentiators: Differentiator[] = [
   {
-    icon: ShieldCheck,
-    title: "Experienced Technical Expertise",
-    description:
-      "Strong software engineering knowledge across modern technologies and platforms, applied thoughtfully to each project.",
-  },
-  {
-    icon: Target,
-    title: "Business-Focused Solutions",
-    description:
-      "Technology decisions are made to support your actual business goals — not to chase trends.",
-  },
-  {
-    icon: Handshake,
-    title: "Reliable Delivery",
-    description:
-      "Clear communication, structured development processes, and maintainable solutions you can depend on.",
-  },
-  {
-    icon: Boxes,
-    title: "Flexible Engagement",
-    description:
-      "Support for individual projects, ongoing development, technical consulting, or engineering team augmentation.",
+    icon: Code2,
+    title: "Experienced Engineering",
+    description: "12+ years of software development experience.",
   },
   {
     icon: MapPin,
-    title: "Canada-Based",
-    description:
-      "Based in Canada, with the ability to work closely with clients across North America.",
+    title: "North America Based",
+    description: "Providing consulting services across Canada and North America.",
+  },
+  {
+    icon: Building2,
+    title: "Enterprise Experience",
+    description: "Experience building and maintaining production-level applications.",
+  },
+  {
+    icon: Sparkles,
+    title: "Modern Technology Approach",
+    description: "Using modern frameworks, architectures, and engineering practices.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Quality Focused",
+    description: "Clean architecture, maintainable code, and scalable solutions.",
   },
 ];
 
@@ -265,13 +231,13 @@ export const industries: Industry[] = [
   { name: "Small & Medium Businesses", icon: Building2 },
 ];
 
-export const serviceInterestOptions = [
-  "Technology Consulting",
-  "Mobile Development",
-  "Web Development",
-  "Software Modernization",
-  "Cloud & Backend",
-  "AI & Automation",
-  "Staff Augmentation",
+export const projectTypeOptions = [
+  "iOS App Development",
+  "Android App Development",
+  "Cross-Platform App Development",
+  "Mobile App Modernization",
+  "Software Consulting",
+  "Application Integration",
+  "Engineering Support / Team Augmentation",
   "Other",
 ] as const;
