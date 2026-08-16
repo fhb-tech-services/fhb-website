@@ -10,11 +10,11 @@ type SubmitState = "idle" | "submitting" | "success" | "error";
 
 /** Formats digits as a North American phone number, e.g. "+1 (123) 456-7890", as the user types. */
 function formatPhoneNumber(value: string): string {
-  let digits = value.replace(/\D/g, "");
-  if (digits.length === 11 && digits.startsWith("1")) {
-    digits = digits.slice(1);
-  }
-  digits = digits.slice(0, 10);
+  // Strip the "+1" prefix as literal text before counting digits, so the "1"
+  // in an already-formatted value (e.g. while backspacing) is never mistaken
+  // for part of the number itself.
+  const withoutPrefix = value.startsWith("+1") ? value.slice(2) : value;
+  const digits = withoutPrefix.replace(/\D/g, "").slice(0, 10);
 
   if (digits.length === 0) return "";
   if (digits.length < 4) return `+1 (${digits}`;
